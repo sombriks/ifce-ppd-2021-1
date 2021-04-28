@@ -5,9 +5,16 @@ import org.junit.jupiter.api.Test;
 
 public class GameTest {
 
-  @Test
-  public void shouldInstantiate(){
-    Game game = new Game();
-    Assertions.assertNotNull(game);
-  }
+    @Test
+    public void shouldConnect() throws Exception {
+        Game g1 = new Game();
+        Assertions.assertEquals(GameStatus.OPEN, g1.getStatus());
+        Thread.sleep(1000); // wait resource allocation
+        Game g2 = new Game();
+        g1.host();
+        g2.join("localhost");
+        Thread.sleep(1000);
+        Assertions.assertEquals(GameStatus.STARTED, g1.getStatus());
+        Assertions.assertEquals(GameStatus.STARTED, g2.getStatus());
+    }
 }
