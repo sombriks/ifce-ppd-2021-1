@@ -14,7 +14,8 @@ public class GameTest {
         g1.host();
         g2.join("localhost");
         Thread.sleep(1000);
-        Assertions.assertEquals(GameStatus.STARTED, g1.getStatus());
-        Assertions.assertEquals(GameStatus.STARTED, g2.getStatus());
+        g1.sendText("Hi!");
+        Assertions.assertEquals(GameStatus.CONNECTED, g1.getStatus());
+        Assertions.assertEquals(GameStatus.CONNECTED, g2.getStatus());
     }
 }
