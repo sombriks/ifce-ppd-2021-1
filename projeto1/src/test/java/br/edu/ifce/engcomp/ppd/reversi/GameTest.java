@@ -16,11 +16,20 @@ public class GameTest {
         g1.host();
         g2.join("localhost");
         Thread.sleep(1000);
+        Assertions.assertEquals(GameStatus.PIECE_SELECT, g1.getStatus());
+        Assertions.assertEquals(GameStatus.PIECE_SELECT, g2.getStatus());
         g1.sendText("Hi!");
         g2.sendText("Hello!");
         g1.playAs(Square.BLACK);
         Thread.sleep(1000);
         Assertions.assertEquals(GameStatus.CONNECTED, g1.getStatus());
         Assertions.assertEquals(GameStatus.CONNECTED, g2.getStatus());
+        Assertions.assertEquals(Square.WHITE, g2.getMySquares());
+        // illegal move at this point of the game: already taken
+        g1.take("d4");
+        // illegal move at this point of the game: not my turn
+        g1.take("c4");
+        // illegal move: gibberish
+        g1.take("f117");
     }
 }

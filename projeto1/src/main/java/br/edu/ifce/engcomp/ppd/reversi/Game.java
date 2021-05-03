@@ -97,16 +97,16 @@ public class Game {
     public void playAs(Square piece) {
         if (status.equals(GameStatus.PIECE_SELECT)) {
             if (Square.BLACK.equals(piece)) {
-                board.setBlacks(Player.PLAYER1);
-                board.setTurn(Player.PLAYER2);
-                board.setWhites(Player.PLAYER2);
+                board.setBlacks(processor.getPlayer());
+                board.setWhites(processor.getOtherPlayer());
+                board.setTurn(processor.getOtherPlayer());
                 if (processor.getPlayer().equals(Player.PLAYER1))
                     messageBuffer.add(processor.makePieceSet(Square.WHITE));
                 status = GameStatus.CONNECTED;
             } else if (Square.WHITE.equals(piece)) {
-                board.setWhites(Player.PLAYER1);
-                board.setBlacks(Player.PLAYER2);
-                board.setTurn(Player.PLAYER1);
+                board.setWhites(processor.getPlayer());
+                board.setBlacks(processor.getOtherPlayer());
+                board.setTurn(processor.getPlayer());
                 if (processor.getPlayer().equals(Player.PLAYER1))
                     messageBuffer.add(processor.makePieceSet(Square.BLACK));
                 status = GameStatus.CONNECTED;
@@ -114,4 +114,11 @@ public class Game {
         }
     }
 
+    public Square getMySquares() {
+        return board.getSquaresFor(processor.getPlayer());
+    }
+
+    public void take(String move) {
+        messageBuffer.add(processor.makeMoveMessage(move));
+    }
 }

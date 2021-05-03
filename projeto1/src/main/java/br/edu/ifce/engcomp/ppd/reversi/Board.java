@@ -5,6 +5,11 @@ import java.util.Map;
 
 public class Board {
 
+    public Square getSquaresFor(Player player) {
+        if (player.equals(whites)) return Square.WHITE;
+        else return Square.BLACK;
+    }
+
     public interface ExecIt {
         void doIt(String key);
     }
@@ -21,7 +26,7 @@ public class Board {
         board.put("e4", Square.BLACK);
         board.put("d5", Square.BLACK);
         board.put("e5", Square.WHITE);
-        System.out.println(board);
+//        System.out.println(board);
     }
 
     private void scanBoard(ExecIt it) {
