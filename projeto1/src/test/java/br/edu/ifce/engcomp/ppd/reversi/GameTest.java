@@ -11,10 +11,15 @@ public class GameTest {
         Assertions.assertEquals(GameStatus.OPEN, g1.getStatus());
         Thread.sleep(1000); // wait resource allocation
         Game g2 = new Game();
+        g1.setDelay(100);
+        g2.setDelay(100);
         g1.host();
         g2.join("localhost");
         Thread.sleep(1000);
         g1.sendText("Hi!");
+        g2.sendText("Hello!");
+        g1.playAs(Square.BLACK);
+        Thread.sleep(1000);
         Assertions.assertEquals(GameStatus.CONNECTED, g1.getStatus());
         Assertions.assertEquals(GameStatus.CONNECTED, g2.getStatus());
     }
