@@ -118,7 +118,15 @@ public class Game {
         return board.getSquaresFor(processor.getPlayer());
     }
 
-    public void take(String move) {
-        messageBuffer.add(processor.makeMoveMessage(move));
+    public void tryTake(String move) {
+    	if(board.isMyTurn(processor.getPlayer()))
+    		messageBuffer.add(processor.makeMoveMessage(move));
+    	else System.out.println("Not my turn");
     }
+
+	public void take(Move square) {
+		// TODO Auto-generated method stub
+		System.out.println(square);
+		
+	}
 }

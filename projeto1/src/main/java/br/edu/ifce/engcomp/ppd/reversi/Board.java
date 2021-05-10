@@ -65,7 +65,7 @@ public class Board {
         this.blacks = blacks;
     }
 
-    private int getWhiteScore() {
+    public int getWhiteScore() {
         final int scoreHolder[] = new int[]{0};
         scanBoard(k -> {
             if (board.get(k).equals(Square.WHITE)) scoreHolder[0]++;
@@ -73,12 +73,16 @@ public class Board {
         return scoreHolder[0];
     }
 
-    private int getBlackScore() {
+    public int getBlackScore() {
         final int scoreHolder[] = new int[]{0};
         scanBoard(k -> {
             if (board.get(k).equals(Square.BLACK)) scoreHolder[0]++;
         });
         return scoreHolder[0];
     }
+
+	public boolean isMyTurn(Player player) {
+		return player.equals(turn);
+	}
 
 }

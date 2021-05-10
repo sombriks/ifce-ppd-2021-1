@@ -25,11 +25,15 @@ public class GameTest {
         Assertions.assertEquals(GameStatus.CONNECTED, g1.getStatus());
         Assertions.assertEquals(GameStatus.CONNECTED, g2.getStatus());
         Assertions.assertEquals(Square.WHITE, g2.getMySquares());
-        // illegal move at this point of the game: already taken
-        g1.take("d4");
+        // legal move
+        g2.tryTake("f4");
         // illegal move at this point of the game: not my turn
-        g1.take("c4");
+        g1.tryTake("c4");
+        Thread.sleep(1000);
+        // illegal move at this point of the game: already taken
+        g1.tryTake("d4");
         // illegal move: gibberish
-        g1.take("f117");
+        g1.tryTake("f117");
+        Thread.sleep(1000);
     }
 }
